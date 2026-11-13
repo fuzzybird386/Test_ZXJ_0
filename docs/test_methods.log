@@ -1,0 +1,2 @@
+PASS: method_tests: 94 assertions on actual ARM-compiled firmware C code
+Model trace saved: tests/build/user_cv_model_trace.csv (synthetic currents, actual C scan/frame order)

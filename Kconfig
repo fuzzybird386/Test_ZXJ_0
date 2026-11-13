@@ -1,0 +1,22 @@
+mainmenu "Single electrode electrochemical workstation"
+source "Kconfig.zephyr"
+menu "Electrochemical workstation"
+config ECW_POWER_HOLD
+    bool "Drive P0.02 high through D1 to hold LDO EN"
+    default y
+config ECW_ADC_REFERENCE_MV
+    int "Measured AD5941 ADC reference in mV"
+    range 1700 1900
+    default 1820
+config ECW_RTIA_SCALE_PPM
+    int "Measured RTIA / nominal RTIA, parts per million"
+    range 500000 1500000
+    default 1000000
+endmenu
+config ECW_DISCONNECT_POWEROFF
+    bool "Remove power hold after BLE disconnect instead of advertising again"
+    default n
+config ECW_RCAL_OHM
+    int "RCAL resistor R8 in ohms"
+    range 1 100000
+    default 200

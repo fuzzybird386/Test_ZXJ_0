@@ -1,0 +1,96 @@
+/dts-v1/;
+#include <nordic/nrf54l15_cpuapp.dtsi>
+#include <zephyr/dt-bindings/gpio/gpio.h>
+#include <zephyr/dt-bindings/pinctrl/nrf-pinctrl.h>
+#include <zephyr/dt-bindings/adc/adc.h>
+#include <zephyr/dt-bindings/adc/nrf-saadc.h>
+#include <zephyr/dt-bindings/regulator/nrf5x.h>
+/ {
+    model = "ECW nRF54L15 AD5941 custom PCB";
+    compatible = "ecw,ecw54";
+    chosen {
+        zephyr,sram = &cpuapp_sram;
+        zephyr,flash = &cpuapp_rram;
+        zephyr,flash-controller = &rram_controller;
+        zephyr,code-partition = &app_partition;
+    };
+    zephyr,user {
+        afe-cs-gpios = <&gpio2 10 GPIO_ACTIVE_LOW>;
+        afe-reset-gpios = <&gpio2 4 GPIO_ACTIVE_LOW>;
+        afe-int-gpios = <&gpio2 3 GPIO_ACTIVE_LOW>;
+        power-hold-gpios = <&gpio0 2 GPIO_ACTIVE_HIGH>;
+        red-gpios = <&gpio1 8 GPIO_ACTIVE_LOW>;
+        green-gpios = <&gpio1 7 GPIO_ACTIVE_LOW>;
+        io-channels = <&adc 0>;
+    };
+};
+&cpuapp_rram {
+    partitions {
+        compatible = "fixed-partitions";
+        #address-cells = <1>;
+        #size-cells = <1>;
+        app_partition: partition@0 {
+            label = "application";
+            reg = <0x0 DT_SIZE_K(1524)>;
+        };
+    };
+};
+&cpuapp_sram { status = "okay"; };
+&gpio0 { status = "okay"; };
+&gpio1 { status = "okay"; };
+&gpio2 { status = "okay"; };
+&gpiote20 { status = "okay"; };
+&gpiote30 { status = "okay"; };
+&clock { status = "okay"; };
+&radio { status = "okay"; };
+&regulators { status = "okay"; };
+&vregmain {
+    status = "okay";
+    regulator-initial-mode = <NRF5X_REG_MODE_DCDC>;
+};
+/* The schematic already fits external load capacitors on both crystals. */
+&hfxo { load-capacitors = "external"; };
+&lfxo { load-capacitors = "external"; };
+&grtc {
+    status = "okay";
+    owned-channels = <0 1 2 3 4 5 6 7 8 9 10 11>;
+    child-owned-channels = <3 4 7 8 9 10 11>;
+};
+&pinctrl {
+    afe_spi_default: afe_spi_default {
+        group1 {
+            psels = <NRF_PSEL(SPIM_SCK, 2, 6)>,
+                    <NRF_PSEL(SPIM_MOSI, 2, 8)>,
+                    <NRF_PSEL(SPIM_MISO, 2, 9)>;
+        };
+    };
+    afe_spi_sleep: afe_spi_sleep {
+        group1 {
+            psels = <NRF_PSEL(SPIM_SCK, 2, 6)>,
+                    <NRF_PSEL(SPIM_MOSI, 2, 8)>,
+                    <NRF_PSEL(SPIM_MISO, 2, 9)>;
+            low-power-enable;
+        };
+    };
+};
+&spi00 {
+    status = "okay";
+    pinctrl-0 = <&afe_spi_default>;
+    pinctrl-1 = <&afe_spi_sleep>;
+    pinctrl-names = "default", "sleep";
+    /* Manual CS is held across the ADI library's split byte transfers. */
+};
+&adc {
+    status = "okay";
+    #address-cells = <1>;
+    #size-cells = <0>;
+    channel@0 {
+        reg = <0>;
+        zephyr,gain = "ADC_GAIN_1_4";
+        zephyr,reference = "ADC_REF_INTERNAL";
+        zephyr,acquisition-time = <ADC_ACQ_TIME_DEFAULT>;
+        zephyr,input-positive = <NRF_SAADC_AIN7>;
+        zephyr,resolution = <12>;
+        zephyr,oversampling = <4>;
+    };
+};

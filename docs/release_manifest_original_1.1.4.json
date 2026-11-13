@@ -1,0 +1,117 @@
+{
+  "date": "2026-11-12",
+  "revision": "cv-audit",
+  "firmware_revision": "1.1.4-cv-audit",
+  "device_name": "CQET",
+  "disconnect_poweroff": true,
+  "red_warning_ms": 3000,
+  "board": "ecw54/nrf54l15/cpuapp",
+  "sdk": "nRF Connect SDK v3.4.2 / Zephyr 4.4.2",
+  "build_success": true,
+  "build_log": "build_cv_audit.log",
+  "flash_used_bytes": 213780,
+  "ram_used_bytes": 78964,
+  "protocol_test_assertions_previously_passed": 10127,
+  "method_test_assertions": 94,
+  "afe_range_test_assertions": 1323,
+  "csv_order_negative_cases": 3,
+  "ble_lifecycle_test_assertions": 36,
+  "boot_test_assertions": 8,
+  "board_test_assertions": 15,
+  "pcb_net_checks_previously_passed": 25,
+  "hex_bin_match": true,
+  "hardware_flash_performed": false,
+  "phone_or_pcb_validation_performed": false,
+  "artifacts": {
+    "ecw54_cqet_cv_audit.hex": {
+      "bytes": 601470,
+      "sha256": "aec349a7268e19e9b30d9f57a26770e0bee7a822cc73f7c426fc101e0c4b24d4"
+    },
+    "ecw54_cqet.hex": {
+      "bytes": 601470,
+      "sha256": "aec349a7268e19e9b30d9f57a26770e0bee7a822cc73f7c426fc101e0c4b24d4"
+    },
+    "ecw54_capsule_app.hex": {
+      "bytes": 601470,
+      "sha256": "aec349a7268e19e9b30d9f57a26770e0bee7a822cc73f7c426fc101e0c4b24d4"
+    },
+    "ecw54_cqet_cv_audit.bin": {
+      "bytes": 213780,
+      "sha256": "64e4ad7529b63ca53350184aae19a645ae68321682728fa88fdd5728207645f3"
+    },
+    "ecw54_cqet.bin": {
+      "bytes": 213780,
+      "sha256": "64e4ad7529b63ca53350184aae19a645ae68321682728fa88fdd5728207645f3"
+    },
+    "ecw54_capsule_app.bin": {
+      "bytes": 213780,
+      "sha256": "64e4ad7529b63ca53350184aae19a645ae68321682728fa88fdd5728207645f3"
+    },
+    "ecw54_cqet_cv_audit.elf": {
+      "bytes": 4850972,
+      "sha256": "c1263f4adb10229af030db93d98e1d324a8810ca89f17f2342daeaf1b20a8c3a"
+    },
+    "ecw54_cqet.elf": {
+      "bytes": 4850972,
+      "sha256": "c1263f4adb10229af030db93d98e1d324a8810ca89f17f2342daeaf1b20a8c3a"
+    },
+    "ecw54_capsule_app.elf": {
+      "bytes": 4850972,
+      "sha256": "c1263f4adb10229af030db93d98e1d324a8810ca89f17f2342daeaf1b20a8c3a"
+    }
+  },
+  "source_sha256": {
+    "boards/ecw/ecw54/board.cmake": "2e13296b57c968ce8fbbaa7727a02bb0b2dcc9bc31afe0ca88c890518a08b458",
+    "boards/ecw/ecw54/board.yml": "2c651cec8f6265b825e86151ecc87ba9434b1c8af965c8d7c372aa88ff618bd4",
+    "boards/ecw/ecw54/ecw54_nrf54l15_cpuapp.dts": "adbf5d648a9812f435df98a190a0dc9bec6d3343d32e3ff11e0f58a90948f2b8",
+    "boards/ecw/ecw54/ecw54_nrf54l15_cpuapp_defconfig": "3f0ca01a97091942455258e581845430ca802936c0a5745d8c2997307d5e4367",
+    "boards/ecw/ecw54/Kconfig.ecw54": "cf50f5f271f8419d08a087b5d636a5087d47ae6d6580f932813644366feb79ce",
+    "CMakeLists.txt": "ed2cdbdb6d8663775d46bbdbba189ee86b421cf91a3f09c51f28264922da4a46",
+    "include/ecw.h": "139771460d46d2e75adb9fed75e2db8722952d3933194a484f559d4b22ac1fda",
+    "include/ecw_wire.h": "0c7820dc776dac629ec77ef5237c5a4169eb6290909faaa2364a3251f95434ce",
+    "Kconfig": "706a4609ab8d7747a23c8e8b0e247a94222b41b4cac9a1df039d6464fec2c109",
+    "prj.conf": "c17e3200badcf3cb31024afce3a1e5ee4385a0dc3244445e24f171140591efd6",
+    "scripts/build.ps1": "52fc7592c72ed71c77018b48746d79f45da72e4ebf369e3829194bc6bec4aa00",
+    "src/ad5941.c": "56c06e9b3c26c52358a8173ea30e0b5df221c4a24db30449f01a0143f317ffc2",
+    "src/ad5941_port.c": "7325163b38f0fa455f210ad661dae15dbb321f373d329cbef2780cfd7c073594",
+    "src/ble_link.c": "3c07b887bde3346e2dce189c24ef63e4d9f88aea72a10ab712ac34bf682914a8",
+    "src/board_io.c": "ec8bc20ee81b30e6829045318b3036c284c1fae17d7ded7062ce21f6cb95f1b4",
+    "src/main.c": "69493781235275b67811d75e4c57dc973991f4495b8bdb97cde5cb8d91b4eac0",
+    "src/methods.c": "413d7fee67f113809499330343806ffa735a20b3d46402a48be3811f8e778029",
+    "src/protocol.c": "b69c1ebd35e5f53822c82f5740d2b60c5c689157bf1fbd41677a071b1dc90586",
+    "tests/ble_stubs/zephyr/bluetooth/bluetooth.h": "f5795f2164638c0cc3477851d281118732c56308adaff0e304fc2d7d4b79ada4",
+    "tests/ble_stubs/zephyr/bluetooth/conn.h": "55ca1f38d05f9b8bbb9c893ab0f49ee56bc26f9632316ebbbcd074e736409fb0",
+    "tests/ble_stubs/zephyr/bluetooth/gatt.h": "f0cbfa119a4733c02d437c113671568c30cbdcad6ab77b0f170c884f1e3bf57d",
+    "tests/ble_stubs/zephyr/bluetooth/services/bas.h": "61927ae0784ff4872d44601e894312fe76c76aaba2be362e8c6333e9fc4877d2",
+    "tests/ble_stubs/zephyr/bluetooth/uuid.h": "37a1503c717f1dcad07b894db6d2cf77720f6ad5f41a2550c40452bfcd54a587",
+    "tests/ble_stubs/zephyr/drivers/adc.h": "95741d2a6aca650759111adf96093387151e95d80e280f736308efeaa6e09ed4",
+    "tests/ble_stubs/zephyr/drivers/gpio.h": "32438767cc4c19165c1f4aeb3ed50b9c7cae15b9dfaf714fd9603ddfc5e48aba",
+    "tests/ble_stubs/zephyr/kernel.h": "e6796ec6497c3f04f673d6af546576997b2e708e1fcecd2438b779f285cda05f",
+    "tests/ble_tests.c": "24ce0055490e1efda7e595bbaa067ec04321b8dfb4992e796659d21e66edea23",
+    "tests/board_tests.c": "a12a3e8be04046bab433a789add56cd01bcfa88bde733cdd318143943e508fb5",
+    "tests/boot_tests.c": "7547640cf875df1b80b5eb0e6462e5794b848418d6a2ccf448f4bdb67b4398c8",
+    "tests/method_tests.c": "071f0544a2ff4e56c05f759237ea713e5bc44654c738361b1abe32c5428ec599",
+    "tests/protocol_tests.c": "826571b89ce44b7efea3f9365835c948ab17b711174167f83db3e4cf5fad97f6",
+    "tests/range_tests.c": "639bf0d9d80544a93c466d648c77bb043f5863254745b25bb741aa763f300c8f",
+    "tests/requirements.txt": "d90554dbf1a94ff0439d2096be6c7bf454ff35de51312d9461fe7079f4a7a270",
+    "tests/run_protocol_tests.py": "5de6d4fb91f8b9dbcd0c9fe7fc888a6d2245fec94bcf6ec4cd0528c4a4401ca6",
+    "tests/stubs/zephyr/kernel.h": "a7bcb02bfeee9d385eb55bd9366336819c9269e059c0b765cdd3dceefe7e342c",
+    "tests/stubs/zephyr/logging/log.h": "361cf2ccc647e5b1c2b1f736de57cc0e617c5a4d0b55388024f417159394ac15",
+    "tests/stubs/zephyr/sys/atomic.h": "de74c881fb265588c1933ca8c139adb7631cbf43da1d041be9c3aa342795a4bc",
+    "tests/stubs/zephyr/sys/util.h": "2989e9986848735ba34d2a8ebbf6351e93d291f13e0f7ccc9bf28a5c26b7820b",
+    "tests/test.ld": "d047164d328b44f8c6c41d4a8c91c48959b5e00df4560ee185df842c206d2f09",
+    "tools/check_cv_csv.py": "15b51a9780f04d338e83f35afb8120b94318677047cf16de6c9e2d52bbc637fc",
+    "tools/inspect_board.py": "60a3e0584feb4435caf150848e1d64d6ca737fefe3b532d19c5826728df9f332",
+    "vendor/ad5940/ad5940.c": "da5a5904eaeaf77ca15663220c0554e4ba49b31f4f8f1bcc6f2cddbcbc36f599",
+    "vendor/ad5940/ad5940.h": "09a6f62790f86afe0e6fc9b07b8d5b42fcbe4dffed190f5ec37bc272f2b3c3a2",
+    "vendor/ad5940/LICENSE": "177858bc98800428455e96603362511206a5cfdf17ff64aec4a849df40a7007e"
+  },
+  "user_cv_regression": {
+    "points": 2561,
+    "complete_round_trips": 4,
+    "legs": 8,
+    "continuous_session_and_sequence": true,
+    "dac_commands_tested": true,
+    "hardware_verified": false
+  }
+}
