@@ -106,7 +106,7 @@ static int cv_read_current(cv_current_sample_t *sample)
     /* Current sign: positive = current into WE (reduction). */
     sample->raw_code = code;
     sample->v_diff_uV = (int32_t)lroundf(v_diff * 1000000.0f);
-    sample->current_nA = -(int32_t)lroundf(v_diff / ec_lpamp_rtia_ohm() * 1e9f);
+    sample->current_nA = (int32_t)lroundf(v_diff / ec_lpamp_rtia_ohm() * 1e9f);
     return 0;
 }
 

@@ -84,7 +84,7 @@ static int ca_read_current_nA(int32_t *current_nA)
 
     uint32_t code = AD5940_ReadAfeResult(AFERESULT_SINC2);
     float v_diff  = AD5940_ADCCode2Volt(code, EC_LPAMP_ADC_PGA, EC_LPAMP_ADC_REF_V);
-    *current_nA = -(int32_t)lroundf(v_diff / ec_lpamp_rtia_ohm() * 1e9f);
+    *current_nA = (int32_t)lroundf(v_diff / ec_lpamp_rtia_ohm() * 1e9f);
     return 0;
 }
 
