@@ -1,0 +1,6 @@
+board:
+  name: ecw54
+  full_name: ECW single channel nRF54L15
+  vendor: local
+  socs:
+    - name: nrf54l15

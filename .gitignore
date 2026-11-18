@@ -1,4 +1,3 @@
 build/
-tests/build/
+tests/out/
 __pycache__/
-*.zip

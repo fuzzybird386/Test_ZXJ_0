@@ -1,0 +1,8 @@
+{
+ "version": "2.0.0",
+ "tasks": [
+  {"label":"ECW: Build","type":"shell","command":"powershell.exe","args":["-NoProfile","-ExecutionPolicy","Bypass","-File","${workspaceFolder}/scripts/build.ps1"],"group":{"kind":"build","isDefault":true},"problemMatcher":"$gcc"},
+  {"label":"ECW: Rebuild","type":"shell","command":"powershell.exe","args":["-NoProfile","-ExecutionPolicy","Bypass","-File","${workspaceFolder}/scripts/build.ps1","-Pristine"],"problemMatcher":"$gcc"},
+  {"label":"ECW: Flash","type":"shell","command":"powershell.exe","args":["-NoProfile","-ExecutionPolicy","Bypass","-File","${workspaceFolder}/scripts/flash.ps1"],"dependsOn":"ECW: Build","problemMatcher":[]}
+ ]
+}

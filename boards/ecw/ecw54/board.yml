@@ -1,6 +1,0 @@
-board:
-  name: ecw54
-  full_name: Single electrode ECW nRF54L15
-  vendor: ecw
-  socs:
-    - name: nrf54l15

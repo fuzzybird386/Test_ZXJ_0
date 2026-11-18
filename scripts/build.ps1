@@ -1,27 +1,17 @@
-param(
-    [string]$SdkRoot = 'C:\ncs\v3.4.2',
-    [string]$ToolchainRoot = 'C:\ncs\toolchains\5f5ef0cea0',
-    [switch]$Pristine
-)
+param([switch]$Pristine, [string]$Sdk = 'C:/ncs/v3.4.2', [string]$Toolchain = 'C:/ncs/toolchains/5f5ef0cea0')
 $ErrorActionPreference = 'Stop'
-$appRoot = Split-Path -Parent $PSScriptRoot
-$envFile = Join-Path $ToolchainRoot 'environment.json'
-$config = Get-Content -LiteralPath $envFile -Raw | ConvertFrom-Json
-foreach ($entry in $config.env_vars) {
-    if ($entry.type -eq 'string') { $value = $entry.value }
-    else { $value = ($entry.values | ForEach-Object { Join-Path $ToolchainRoot $_ }) -join ';' }
-    if ($entry.existing_value_treatment -eq 'prepend_to') {
-        $value += ';' + [Environment]::GetEnvironmentVariable($entry.key,'Process')
-    }
-    [Environment]::SetEnvironmentVariable($entry.key,$value,'Process')
+$project = Split-Path $PSScriptRoot -Parent
+$spec = Get-Content "$Toolchain/environment.json" | ConvertFrom-Json
+foreach ($item in $spec.env_vars) {
+ if ($item.type -eq 'relative_paths') {
+  $value = ($item.values | ForEach-Object { Join-Path $Toolchain $_ }) -join ';'
+  if ($item.existing_value_treatment -eq 'prepend_to') { $value += ';' + [Environment]::GetEnvironmentVariable($item.key) }
+ } else { $value = $item.value }
+ [Environment]::SetEnvironmentVariable($item.key, $value, 'Process')
 }
-$env:ZEPHYR_BASE = Join-Path $SdkRoot 'zephyr'
-$pythonExe = Join-Path $ToolchainRoot 'opt\bin\python.exe'
-$buildArgs = @('-m','west','build','-b','ecw54/nrf54l15/cpuapp','-d',(Join-Path $appRoot 'build'),$appRoot)
-if ($Pristine) { $buildArgs += @('-p','always') }
-$buildArgs += @('--',"-DBOARD_ROOT=$appRoot")
-Push-Location $appRoot
-try {
-    & $pythonExe @buildArgs
-    if ($LASTEXITCODE -ne 0) { throw "Build failed ($LASTEXITCODE)" }
-} finally { Pop-Location }
+$env:ZEPHYR_BASE = "$Sdk/zephyr"
+$buildArgs = @('build', '--no-sysbuild', '-b', 'ecw54/nrf54l15/cpuapp', '-d', "$project/build", $project)
+if ($Pristine) { $buildArgs += @('-p', 'always') }
+Push-Location $project
+try { & "$Toolchain/opt/bin/python.exe" -m west @buildArgs; if ($LASTEXITCODE -ne 0) { throw 'Build failed' } }
+finally { Pop-Location }

@@ -1,9 +1,11 @@
-ENTRY(run_tests)
-MEMORY { flash (rx) : ORIGIN = 0x10000, LENGTH = 512K
-         ram (rw) : ORIGIN = 0x20000000, LENGTH = 512K }
+ENTRY(test_entry)
+MEMORY {
+ flash (rx) : ORIGIN = 0x10000, LENGTH = 1M
+ ram (rwx) : ORIGIN = 0x20000000, LENGTH = 1M
+}
 SECTIONS {
  .text : { *(.text*) *(.rodata*) } > flash
  .data : { *(.data*) } > ram
- .bss (NOLOAD) : { *(.bss*) *(COMMON) } > ram
- /DISCARD/ : { *(.ARM.exidx*) *(.ARM.extab*) *(.note*) *(.comment*) }
+ .bss : { *(.bss*) *(COMMON) } > ram
+ /DISCARD/ : { *(.ARM.exidx*) *(.ARM.extab*) }
 }

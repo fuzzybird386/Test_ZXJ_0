@@ -1,0 +1,48 @@
+/dts-v1/;
+#include <nordic/nrf54l15_cpuapp.dtsi>
+#include <zephyr/dt-bindings/pinctrl/nrf-pinctrl.h>
+/ {
+ model = "ECW nRF54L15 AD5941 single channel";
+ compatible = "local,ecw54";
+ chosen {
+  zephyr,flash-controller = &rram_controller;
+  zephyr,flash = &cpuapp_rram;
+  zephyr,sram = &cpuapp_sram;
+  zephyr,code-partition = &slot0_partition;
+ };
+};
+#include <vendor/nordic/nrf54l15_cpuapp_partition.dtsi>
+&cpuapp_sram { status = "okay"; };
+&lfxo { load-capacitors = "external"; };
+&hfxo { load-capacitors = "external"; };
+&regulators { status = "okay"; };
+&vregmain { status = "okay"; regulator-initial-mode = <NRF5X_REG_MODE_LDO>; };
+&grtc {
+ owned-channels = <0 1 2 3 4 5 6 7 8 9 10 11>;
+ child-owned-channels = <3 4 7 8 9 10 11>;
+ status = "okay";
+};
+&clock { status = "okay"; };
+&gpio0 { status = "okay"; };
+&gpio1 { status = "okay"; };
+&gpio2 { status = "okay"; };
+&gpiote20 { status = "okay"; };
+&gpiote30 { status = "okay"; };
+&radio { status = "okay"; };
+&adc { status = "okay"; };
+&pinctrl {
+ spi00_default: spi00_default {
+  group1 { psels = <NRF_PSEL(SPIM_SCK, 2, 6)>, <NRF_PSEL(SPIM_MISO, 2, 9)>, <NRF_PSEL(SPIM_MOSI, 2, 8)>; };
+ };
+ spi00_sleep: spi00_sleep {
+  group1 { psels = <NRF_PSEL(SPIM_SCK, 2, 6)>, <NRF_PSEL(SPIM_MISO, 2, 9)>, <NRF_PSEL(SPIM_MOSI, 2, 8)>; low-power-enable; };
+ };
+};
+&spi00 {
+ compatible = "nordic,nrf-spim";
+ status = "okay";
+ pinctrl-0 = <&spi00_default>;
+ pinctrl-1 = <&spi00_sleep>;
+ pinctrl-names = "default", "sleep";
+ /* CS P2.10 is controlled manually by the ADI port. */
+};
